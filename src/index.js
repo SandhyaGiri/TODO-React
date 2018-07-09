@@ -1,7 +1,10 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
+import React from 'react'
+import ReactDOM from 'react-dom'
+import { createStore } from 'redux'
+import { Provider } from 'react-redux'
 import TodoListContainer from './components/todo-list-container'
-import './App.css';
+import './App.css'
+import { todoAppReducer } from './redux/reducers'
 
 const listItems = [
     {
@@ -21,8 +24,10 @@ const listItems = [
     }
 ]
 
+const store = createStore(todoAppReducer, listItems)
+
 ReactDOM.render(
-    <div>
+    <Provider store={store}>
         <TodoListContainer items={listItems} />
-    </div>
+    </Provider>
     , document.getElementById('root'));
