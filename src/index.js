@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import TodoList from './components/todo-list'
+import TodoListContainer from './components/todo-list-container'
 import './App.css';
 
 const listItems = [
@@ -20,6 +20,6 @@ const listItems = [
 
 ReactDOM.render(
     <div>
-        <TodoList items={listItems} />
+        <TodoListContainer items={listItems} />
     </div>
     , document.getElementById('root'));

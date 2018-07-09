@@ -5,12 +5,12 @@ import TodoItem from './todo-item'
 class TodoList extends Component {
 
     render() {
-        const { items } = this.props
+        const { items, onItemComplete } = this.props
         if (items.length) {
             let listItems = items.map((item, index) => {
                 return (
-                    <li>
-                        <TodoItem label={item.label} completed={item.completed}/>
+                    <li key={index}>
+                        <TodoItem id={index} label={item.label} completed={item.completed} onComplete={onItemComplete}/>
                     </li>
                 )
             })
@@ -27,7 +27,8 @@ class TodoList extends Component {
 }
 
 TodoList.propTypes = {
-    items: PropTypes.arrayOf(PropTypes.shape(TodoItem.propTypes))
+    items: PropTypes.arrayOf(PropTypes.shape(TodoItem.propTypes)),
+    onItemComplete: PropTypes.func.isRequired
 }
 
 export default TodoList
