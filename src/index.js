@@ -5,14 +5,17 @@ import './App.css';
 
 const listItems = [
     {
+        id: 0,
         label: `Buy Fruits`,
         completed: false
     },
     {
+        id: 1,
         label: `Withdraw cash`,
         completed: false
     },
     {
+        id: 2,
         label: `Attend react workshop`,
         completed: true
     }

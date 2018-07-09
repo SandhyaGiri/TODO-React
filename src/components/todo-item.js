@@ -5,23 +5,26 @@ import classNames from 'classnames'
 class TodoItem extends Component {
 
     render() {
-        const { id, label, completed, onComplete } = this.props
-        const labelClass = classNames('todo-list-item', {
+        const { id, label, completed, onComplete, onDelete } = this.props
+        const className = classNames('todo-list-item', {
             'todo-list-item--completed': completed
         })
         return (
-            <div>
+            <div className={className}>
                 <input type="checkbox" checked={completed} onChange={(e) => onComplete(id, !!e.target.checked)}/>
-                <label className={labelClass}>{label}</label>
+                <label>{label}</label>
+                <button className="todo-list-item__deleteBtn" onClick={(e) => onDelete(id)}/>
             </div>
         )
     }
 }
 
 TodoItem.propTypes = {
+    id: PropTypes.number.isRequired,
     label: PropTypes.string.isRequired,
     completed: PropTypes.bool,
-    onComplete: PropTypes.func 
+    onComplete: PropTypes.func,
+    onDelete: PropTypes.func
 }
 
 export default TodoItem

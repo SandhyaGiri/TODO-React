@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import TodoList from './todo-list'
-import TodoItem from './todo-item'
+import { TodoItemType } from './todo-item-type'
 
 class TodoListContainer extends Component {
     constructor(props) {
@@ -23,6 +23,7 @@ class TodoListContainer extends Component {
     onKeyPress(e) {
         if (e.target && e.which === 13) {
             const newTodoItem = {
+                id: this.state.items.length+1,
                 label: this.state.todoEntry,
                 completed: false
             }
@@ -36,9 +37,22 @@ class TodoListContainer extends Component {
         }
     }
 
-    _onItemComplete(itemIndex, completed) {
+    _onItemComplete(itemId, completed) {
         const newItems = Object.assign([], this.state.items)
-        newItems[itemIndex].completed = completed
+        newItems.forEach(item => {
+            if(item.id === itemId) {
+                item.completed = completed
+            }
+        });
+        
+        this.setState({
+            items: newItems
+        })
+    }
+
+    _onItemDelete(itemId) {
+        let newItems = Object.assign([], this.state.items)
+        newItems = newItems.filter((item) => item.id !== itemId)
         
         this.setState({
             items: newItems
@@ -55,14 +69,14 @@ class TodoListContainer extends Component {
                     <input type="text" id="addTodo" placeholder="What needs to be done?"
                         value={todoEntry} onChange={this.onChange} onKeyPress={this.onKeyPress}/>
                 </div>
-                <TodoList items={items} onItemComplete={this._onItemComplete.bind(this)}/>
+                <TodoList items={items} onItemComplete={this._onItemComplete.bind(this)} onItemDelete={this._onItemDelete.bind(this)}/>
             </div>
         )
     }
 }
 
 TodoListContainer.propTypes = {
-    items: PropTypes.arrayOf(PropTypes.shape(TodoItem.propTypes))
+    items: PropTypes.arrayOf(TodoItemType)
 }
 
 export default TodoListContainer
