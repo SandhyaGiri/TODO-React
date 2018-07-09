@@ -1,0 +1,22 @@
+.todo-list {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.todo-list li {
+    position: relative;
+    font-size: 30px;
+    border-bottom: 1px solid #ededed;
+}
+
+.todo-list li input[type="checkbox"] {
+    width: 24px;
+    height: 24px;
+    padding-top: 22px;
+    margin-top: 10px;
+}
+
+.todo-list li label {
+    padding-left: 10px;
+}
